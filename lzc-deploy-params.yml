@@ -1,0 +1,21 @@
+params:
+  - id: login_user
+    type: string
+    name: Login username
+    description: Initial username for the HarnessRouter console.
+    default_value: harnessrouter
+    optional: false
+  - id: login_password
+    type: secret
+    name: Login password
+    description: Initial console password. Profile password changes take precedence over this setting.
+    default_value: $random(len=24)
+    optional: false
+locales:
+  zh:
+    login_user:
+      name: 登录用户名
+      description: HarnessRouter 控制台的初始用户名。
+    login_password:
+      name: 登录密码
+      description: 初始控制台密码，默认随机生成。Profile 中修改后的密码优先于此设置。

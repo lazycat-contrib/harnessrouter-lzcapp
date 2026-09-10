@@ -1,0 +1,29 @@
+name: Publish HarnessRouter to MiaoMiao
+on:
+  schedule:
+    - cron: '7 5 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '首次发布填 0.15.10；留空检查上游稳定版本'
+        type: string
+        required: false
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: harnessrouter-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    uses: ca-x/lazycat-github-action/.github/workflows/lazycat.yml@v1
+    with:
+      operation: auto
+      config: .github/lazycat-action.yml
+      version: ${{ inputs.version || '' }}
+      toolchains: none
+      versioned-release-asset: true
+    secrets:
+      APPSTORE_URL: ${{ secrets.APPSTORE_URL }}
+      APPSTORE_TOKEN: ${{ secrets.APPSTORE_TOKEN }}
+      PRIVATE_STORE_GROUP_CODES: ${{ secrets.PRIVATE_STORE_GROUP_CODES }}

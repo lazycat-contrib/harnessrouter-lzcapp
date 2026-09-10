@@ -1,0 +1,28 @@
+application:
+  subdomain: harnessrouter
+  background_task: true
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://harnessrouter:3000/
+services:
+  harnessrouter:
+    # upstream: docker.io/harnessrouter/harnessrouter:0.15.10
+    image: docker.1ms.run/harnessrouter/harnessrouter:0.15.10
+    environment:
+      - PORT=3000
+      - HR_DATA_DIR=/data
+      - HR_AUTH_USER={{ .U.login_user }}
+      - HR_AUTH_PASSWORD={{ .U.login_password }}
+      - HR_SECRET_KEY={{ stable_secret "harnessrouter_secret_key" }}
+    binds:
+      - /lzcapp/var/data:/data
+usage: |
+  使用安装向导中的用户名和密码登录。首次启动会下载启用的 agent CLI，请等待日志出现 ready on :3000。
+  进入 Integrations 添加模型服务商 API Key 后才能执行任务，本包不包含模型额度或试用密钥。
+  控制台和 API 由 HarnessRouter 自身鉴权。保留手动登录，不添加文件选择器。
+  数据库、文件、密钥存储、工作区和 CLI 数据保存在 /lzcapp/var/data，建议预留至少 4 GB 磁盘空间。
+  Profile 中修改后的账号凭据优先于安装参数；后续修改安装参数不会覆盖 Profile 中保存的密码。
+  加密密钥由系统稳定生成，迁移到其他微服时需同时保留原密钥与数据。

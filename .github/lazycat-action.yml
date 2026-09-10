@@ -1,0 +1,35 @@
+version: 1
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/application.lpk
+  target_arch: amd64
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: harnessrouter
+build:
+  toolchains: []
+  run_buildscript: false
+images:
+  - id: harnessrouter
+    target: service
+    service: harnessrouter
+    source: docker.io/harnessrouter/harnessrouter
+    channel: stable
+    sort: semver
+    tag_regex: '^[0-9]+\.[0-9]+\.[0-9]+$'
+    delivery:
+      mode: mirror
+      require_digest_match: true
+stores:
+  official:
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: HarnessRouter
+    summary: 自托管的统一 Agent 运行接口，支持多种 Agent、会话、流式输出、文件和任务管理，实现开放的 UHP 协议。
