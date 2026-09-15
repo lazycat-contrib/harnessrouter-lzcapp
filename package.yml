@@ -1,5 +1,5 @@
 package: community.lazycat.app.harnessrouter
-version: 0.17.1
+version: 0.17.2
 name: HarnessRouter
 description: "HarnessRouter Community Edition: the self-hosted, Apache-2.0 edition of the unified interface for agent harnesses. Run Codex, Claude Code, Hermes, PI, DSH, and more through one API, with sessions, streaming, files, cancellation, and failure handling. Implements the Unified Harness Protocol (UHP), an open standard. Your keys, your infrastructure."
 homepage: https://github.com/HarnessRouter/harnessrouter
