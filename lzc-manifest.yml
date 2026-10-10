@@ -9,8 +9,8 @@ application:
       backend: http://harnessrouter:3000/
 services:
   harnessrouter:
-    # upstream: docker.io/harnessrouter/harnessrouter:0.32.3
-    image: docker.1ms.run/harnessrouter/harnessrouter:0.32.3
+    # upstream: docker.io/harnessrouter/harnessrouter:0.32.6
+    image: docker.1ms.run/harnessrouter/harnessrouter:0.32.6
     environment:
       - PORT=3000
       - HR_DATA_DIR=/data
